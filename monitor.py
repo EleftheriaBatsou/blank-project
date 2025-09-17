@@ -97,15 +97,6 @@ def main() -> None:
     telegram_chat_id = _env("TELEGRAM_CHAT_ID")
     twitter_username = _env("TWITTER_USERNAME", "CosineAI", required=False)
 
-    # Optional test mode: send a simple message and exit
-    if os.getenv("SEND_TEST_MESSAGE"):
-        send_telegram_message(
-            telegram_bot_token,
-            telegram_chat_id,
-            "Test OK: CosineAI Twitter → Telegram Notifier is configured and can send messages.",
-        )
-        return
-
     state = load_state()
     last_seen_id = state.get("last_seen_id")
     first_run = last_seen_id is None

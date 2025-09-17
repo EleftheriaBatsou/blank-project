@@ -21,13 +21,6 @@ Quick setup
    - The included workflow runs on a schedule (every 6 hours) and can be run manually via “Run workflow.”
    - The workflow commits a small state file back to the repo to remember the last seen tweet. Ensure Actions has write permissions for contents (default for public repos; for private, set permissions in the workflow or repo settings).
 
-Manual test message (no Twitter needed)
-- You can manually send a “Test OK” message to your Telegram to verify configuration:
-  - Go to the repo → Actions → “CosineAI Twitter → Telegram Notifier” → Run workflow
-  - In the “send_test” input, choose “true” → Run
-  - You should receive: “Test OK: CosineAI Twitter → Telegram Notifier is configured and can send messages.”
-  - This doesn’t touch state and doesn’t call Twitter.
-
 How to get required tokens/IDs
 - Twitter/X API (Bearer):
   - Create a Twitter developer app and get the v2 Bearer token.

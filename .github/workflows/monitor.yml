@@ -2,15 +2,6 @@ name: CosineAI Twitter → Telegram Notifier
 
 on:
   workflow_dispatch:
-    inputs:
-      send_test:
-        description: "Send a test Telegram message and exit"
-        required: false
-        default: "false"
-        type: choice
-        options:
-          - "false"
-          - "true"
   schedule:
     - cron: "0 */6 * * *"  # every 6 hours
 
@@ -43,12 +34,10 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           TWITTER_USERNAME: ${{ secrets.TWITTER_USERNAME }}
-          SEND_TEST_MESSAGE: ${{ (github.event_name == 'workflow_dispatch' && github.event.inputs.send_test == 'true') && '1' || '' }}
         run: |
           python monitor.py
 
       - name: Commit state if changed
-        if: ${{ !env.SEND_TEST_MESSAGE }}
         run: |
           if [[ -n "$(git status --porcelain)" ]]; then
             git config user.name "github-actions[bot]"
