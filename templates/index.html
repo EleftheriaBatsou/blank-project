@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="card">
+  <form class="add-form" action="{{ url_for('add') }}" method="post">
+    <input class="text" type="text" name="title" placeholder="Add a new task..." autocomplete="off" required>
+    <button class="btn primary" type="submit">Add</button>
+  </form>
+</section>
+
+<section class="card">
+  {% if not todos %}
+    <p class="empty">You're all caught up. Add your first task above.</p>
+  {% else %}
+    <ul class="todo-list">
+      {% for t in todos %}
+        <li class="todo-item {% if t.done %}done{% endif %}">
+          <form class="inline" action="{{ url_for('toggle', todo_id=t.id) }}" method="post">
+            <button class="icon-btn" title="Toggle done" aria-label="Toggle done">✓</button>
+          </form>
+          <div class="title" title="{{ t.title }}">
+            {% if t.done %}
+              <s>{{ t.title }}</s>
+            {% else %}
+              {{ t.title }}
+            {% endif %}
+          </div>
+          <details class="actions">
+            <summary aria-label="Actions">•••</summary>
+            <div class="menu">
+              <form action="{{ url_for('edit', todo_id=t.id) }}" method="post" class="edit-form">
+                <input type="text" name="title" value="{{ t.title }}" required>
+                <button class="btn" type="submit">Save</button>
+              </form>
+              <form action="{{ url_for('delete', todo_id=t.id) }}" method="post" onsubmit="return confirm('Delete this task?');">
+                <button class="btn danger" type="submit">Delete</button>
+              </form>
+            </div>
+          </details>
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+</section>
+{% endblock %}

@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>To‑Do List</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <div class="container">
+      <header class="header">
+        <h1>To‑Do List</h1>
+      </header>
+      <main>
+        {% block content %}{% endblock %}
+      </main>
+      <footer class="footer">
+        <span>Simple Flask app — data stored locally in state/todos.json</span>
+      </footer>
+    </div>
+  </body>
+</html>
